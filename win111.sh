@@ -1,33 +1,37 @@
-#!/bin/bash
-#
-#Vars
-yum install unzip -y
-wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && unzip ngrok-stable-linux-amd64.zip
-clear
-echo "Katacoda Centos Windows 11 by fb.com/thuong.hai.581"
-read -p "Paste authtoken here (Copy and Right-click to paste): " CRP
+echo "===================================="
+echo "Download windows files"
+echo "===================================="
+curl -L -o w10x64.img https://app.vagrantup.com/thuonghai2711/boxes/WindowsQCOW2/versions/1.0.2/providers/qemu.box
+echo "===================================="
+echo "Download ngrok"
+echo "===================================="
+wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip > /dev/null 2>&1
+unzip ngrok-stable-linux-amd64.zip &>/dev/null &
+unzip ngrok-stable-linux-amd64.zip1 &>/dev/null &
+read -p "Ctrl + V Authtoken: " CRP 
 ./ngrok authtoken $CRP 
-nohup ./ngrok tcp --region eu 30889 &>/dev/null &
-yum install sudo -y
-echo "Downloading QEMU"
-sudo yum install -y qemu-kvm
-link1_status=$(curl -Is -k https://app.vagrantup.com/thuonghai2711/boxes/WindowsQCOW2/versions/1.0.2/providers/qemu.box | grep HTTP | cut -f2 -d" " | head -1)
-link2_status=$(curl -Is -k https://transfer.sh/1XQtaoZ/lite11.qcow2 | grep HTTP | cut -f2 -d" ")
-sudo wget -O lite11.qcow2 https://app.vagrantup.com/thuonghai2711/boxes/WindowsQCOW2/versions/1.0.2/providers/qemu.box
-[ -s lite11.qcow2 ] || sudo wget -O lite11.qcow2 https://transfer.sh/1XQtaoZ/lite11.qcow2
-availableRAMcommand="free -m | tail -2 | head -1 | awk '{print \$7}'"
-availableRAM=$(echo $availableRAMcommand | bash)
-custom_param_ram="-m "$(expr $availableRAM - 856 )"M"
-cpus=$(lscpu | grep CPU\(s\) | head -1 | cut -f2 -d":" | awk '{$1=$1;print}')
-nohup sudo /usr/libexec/qemu-kvm -nographic -net nic -net user,hostfwd=tcp::30889-:3389 -show-cursor $custom_param_ram -localtime -enable-kvm -cpu host,hv_relaxed,hv_spinlocks=0x1fff,hv_vapic,hv_time,+nx -M pc -smp cores=$cpus -vga std -machine type=pc,accel=kvm -usb -device usb-tablet -k en-us -drive file=lite11.qcow2,index=0,media=disk,format=qcow2 -boot once=d &>/dev/null &
-clear
-echo "Katacoda Centos Windows 11 by fb.com/thuong.hai.581"
-echo Your RDP IP Address:
+nohup ./ngrok tcp 3388 &>/dev/null &
+./ngrok tcp 3388 &>/dev/null &
+echo "===================================="
+echo Downloading File From akuh.net
+echo "===================================="
+apt-get install qemu > /dev/null 2>&1
+echo "===================================="
+echo "Wait"
+echo "Starting Windows"
+echo "===================================="
+echo "===================================="
+echo RDP Address:
 curl --silent --show-error http://127.0.0.1:4040/api/tunnels | sed -nE 's/.*public_url":"tcp:..([^"]*).*/\1/p'
-echo User: Administrator
-echo Password: Thuonghai001
-echo Script by fb.com/thuong.hai.581
-echo Wait 2-4m VM boot up before connect. 
-echo Do not close Katacoda tab. VM expired in 1 hour.
-sleep 43210
-
+echo "===================================="
+echo "===================================="
+echo "Ctrl+C To Copy"
+echo "Wait 1-2 minute to finish bot"
+echo "Dont Close This Tab"
+echo "===================================="
+echo "===================================="
+echo "Username: akuh"
+echo "Password: Akuh.Net"
+echo "===================================="
+qemu-system-x86_64 -hda w10x64.img -m 8G -smp cores=4 -net user,hostfwd=tcp::3388-:3389 -net nic -object rng-random,id=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -vga vmware -nographic  > /dev/null 2>&1
+sleep 43200
