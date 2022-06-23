@@ -1,4 +1,4 @@
 unzip tt.zip
-chmod +x /tt/build.bat
+chmod +x tt/build.bat
 ./tt/build.bat
-python /tt/TikTokMulti.py
+python tt/TikTokMulti.py
