@@ -1,3 +1,4 @@
+#!/bin/bash
 ffmpeg -i 1.mp4 -f srt -i 1__ar-SA.srt -c:v copy -c:a copy -c:s mov_text 1F.mp4
 
 ffmpeg -i 2.mp4 -f srt -i 2__ar-SA.srt -c:v copy -c:a copy -c:s mov_text 2F.mp4
