@@ -1,4 +1,4 @@
-cd /content/drive/MyDrive/tt/
+cd /content/drive/MyDrive/tt1/
 pip install TikTokDownload
 pip install requests
 pip install retrying
