@@ -49,3 +49,4 @@ ffmpeg -i 34.mp4 -f srt -i 34__ar-SA.srt -c:v copy -c:a copy -c:s mov_text 34F.m
 ffmpeg -i 35.mp4 -f srt -i 35__ar-SA.srt -c:v copy -c:a copy -c:s mov_text 35F.mp4
 ffmpeg -i 36.mp4 -f srt -i 36__ar-SA.srt -c:v copy -c:a copy -c:s mov_text 36F.mp4
 ffmpeg -i 37.mp4 -f srt -i 37__ar-SA.srt -c:v copy -c:a copy -c:s mov_text 37F.mp4
+ffmpeg -i 37.mp4 -f srt -i 38__ar-SA.srt -c:v copy -c:a copy -c:s mov_text 38F.mp4
