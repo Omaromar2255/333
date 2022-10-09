@@ -1,0 +1,1 @@
+! for i in /home/22/Downloads/*.mp4; do ffmpeg -i $i -s 1080x1920 -preset ultrafast -aspect 9/16 -metadata creation_time="2022-07-18T22:16:29.198347900Z" -filter_complex "[0:v]drawtext=font=Arial:text='suad staly':r=30.0:x=35:y=19:fontcolor=0x000000ff:fontsize=81:box=1:boxcolor=0xf2f2f27f,setdar=9/16[out]" -map "[out]" $i-f.mp4 && rm -rf $i; done
